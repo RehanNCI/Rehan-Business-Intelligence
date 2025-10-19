@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>KeyVibes Dashboard</title>
+<style>
+  /* ---------- Base / Reset ---------- */
+  *, *::before, *::after { box-sizing: border-box; }
+  html,body { height: 100%; margin: 0; padding: 0; }
+  body {
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    background:#f4f6f8;
+    color:#1f2937;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    line-height:1.45;
+  }
+
+  /* ---------- Header ---------- */
+  header {
+    background: linear-gradient(90deg,#013a63 0%, #00529b 100%);
+    color:#fff;
+    padding: 18px 16px;
+    text-align: center;
+  }
+  header .title {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 600;
+    letter-spacing: -0.2px;
+  }
+  header .subtitle {
+    margin: 6px 0 0;
+    font-size: 0.95rem;
+    opacity: 0.95;
+  }
+
+  /* ---------- Layout Container ---------- */
+  .main {
+    max-width: 1100px;
+    margin: 20px auto;
+    padding: 0 16px;
+  }
+
+  /* ---------- Sections ---------- */
+  .section {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 18px;
+    margin-bottom: 18px;
+    box-shadow: 0 6px 18px rgba(15,23,42,0.06);
+    transition: transform .15s ease, box-shadow .15s ease;
+  }
+  .section:focus-within,
+  .section:hover { transform: translateY(-2px); box-shadow:0 10px 26px rgba(15,23,42,0.09); }
+  .section h2 {
+    margin:0 0 12px 0;
+    font-size: 1.15rem;
+    color:#044a8a;
+    display:inline-block;
+    border-bottom:2px solid #044a8a;
+    padding-bottom:2px;
+  }
+
+  .subtext { margin: 0 0 8px 0; color:#374151; font-size:0.96rem; }
+
+  /* ---------- Grid for charts (responsive) ---------- */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+    align-items: start;
+  }
+
+  /* make charts full-width and give a sensible min-height */
+  .chart {
+    width: 100%;
+    min-height: 260px;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #fff;
+  }
+
+  /* list styling */
+  .recommendations ul {
+    margin: 0;
+    padding-left: 0;
+    list-style: none;
+    display: grid;
+    gap: 10px;
+  }
+  .recommendations li {
+    padding: 10px 12px;
+    background:#fbfdff;
+    border-left:4px solid #0b75d1;
+    border-radius:8px;
+    font-size:0.95rem;
+    color:#0f172a;
+  }
+
+  /* technical doc paragraphs */
+  .tech p { margin: 8px 0; font-size:0.95rem; color:#263238; }
+
+  /* ---------- Mobile responsiveness ---------- */
+  @media (max-width: 900px) {
+    .grid { grid-template-columns: 1fr; }
+    .chart { min-height: 300px; }
+    header { padding: 14px 12px; }
+    header .title { font-size: 1.1rem; }
+    header .subtitle { font-size: 0.9rem; }
+    .section { padding: 14px; margin-bottom: 14px; }
+  }
+
+  @media (max-width: 420px) {
+    body { font-size: 15px; }
+    .chart { min-height: 260px; }
+    .section h2 { font-size: 1rem; }
+    .recommendations li { font-size: 0.92rem; padding: 9px 10px; }
+  }
+
+  /* small utility */
+  .muted { color:#6b7280; font-size:0.88rem; }
+</style>
+</head>
+<body>
+
+<header>
+  <p class="title">KeyVibes Dashboard</p>
+  <p class="subtitle">Personalized Smart Car Key Fobs — Data-Driven Insights</p>
+</header>
+
+<main class="main">
+
+  <!-- Executive -->
+  <section class="section" aria-labelledby="exec-heading">
+    <h2 id="exec-heading">Executive Dashboard</h2>
+    <p class="subtext">Key metrics: Sales Conversion Rate, Customer Acquisition Cost, Feature Popularity, Market Share, Net Promoter Score.</p>
+
+    <!-- single-column layout for smaller screens, 2-column for wide -->
+    <div class="grid">
+      <div id="lineTrend" class="chart" role="img" aria-label="Search trends line chart"></div>
+      <div id="barFeatures" class="chart" role="img" aria-label="Feature popularity bar chart"></div>
+    </div>
+  </section>
+
+  <!-- Customer Segmentation -->
+  <section class="section" aria-labelledby="seg-heading">
+    <h2 id="seg-heading">Customer Segmentation</h2>
+    <p class="subtext">Visual breakdown of audience segments and engagement across platforms.</p>
+    <div class="grid">
+      <div id="pieSegments" class="chart" role="img" aria-label="Customer segments pie chart"></div>
+      <div id="heatmapEngagement" class="chart" role="img" aria-label="Engagement heatmap"></div>
+    </div>
+  </section>
+
+  <!-- Funnel -->
+  <section class="section" aria-labelledby="funnel-heading">
+    <h2 id="funnel-heading">Marketing Funnel & Conversion</h2>
+    <p class="subtext">Key conversion steps from visits to purchases across channels.</p>
+    <div id="funnelChart" class="chart" role="img" aria-label="Marketing funnel chart"></div>
+  </section>
+
+  <!-- Insights & Recommendations -->
+  <section class="section recommendations" aria-labelledby="insights-heading">
+    <h2 id="insights-heading">Insights & Recommendations</h2>
+    <ul>
+      <li>Target <strong>millennials</strong> and <strong>Gen Z</strong> drivers who value personalization and tech-driven experiences.</li>
+      <li>Prioritise <strong>NFC-enabled smart keys</strong> and <strong>eco-friendly materials</strong> to differentiate KeyVibes.</li>
+      <li>Adopt pricing: <strong>$79–$89</strong> (standard) and <strong>$99–$100</strong> (premium).</li>
+      <li>Marketing allocation: <strong>60% Instagram</strong>, <strong>25% Etsy</strong>, <strong>15% TikTok</strong>.</li>
+      <li>Monitor CAC and conversion weekly; iterate creatives and offers for top-performing segments.</li>
+    </ul>
+  </section>
+
+  <!-- Technical Documentation -->
+  <section class="section tech" aria-labelledby="tech-heading">
+    <h2 id="tech-heading">Technical Documentation</h2>
+    <p class="muted"><strong>Data sources:</strong> Google Trends, Google Keyword Planner, Kaggle automotive datasets, Reddit, X (Twitter), and user surveys.</p>
+    <p><strong>Data processing:</strong> Python (pandas, numpy) for cleaning and feature engineering; NLTK for sentiment preprocessing.</p>
+    <p><strong>Visualisation:</strong> Plotly.js for interactive charts; data exported to JS variables embedded in this file.</p>
+    <p><strong>Deployment:</strong> Hosted on GitHub Pages as a single self-contained HTML; all CSS/JS embedded for offline testing.</p>
+    <p><strong>AI assistance:</strong> ChatGPT used for code snippets, debugging and visualization ideas; all outputs were validated and adapted to the datasets.</p>
+  </section>
+
+</main>
+
+<!-- Plotly (CDN allowed by assignment) -->
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<script>
+  /***** Sample data - replace with your real exported JS variables *****/
+  const trendData = { x:['Jan','Feb','Mar','Apr','May','Jun'], y:[45,50,72,68,84,95] };
+  const featureData = { x:['Engravings','Colors','NFC','Eco Materials'], y:[180,140,320,190] };
+  const segmentsData = { labels:['Millennials','Gen Z','Others'], values:[42,36,22] };
+  const heatmapZ = [
+    [12, 18, 25], // Millennials -> Instagram, TikTok, Etsy
+    [20, 28, 12], // Gen Z
+    [10, 8, 14]   // Others
+  ];
+  const funnelX = [1200, 700, 420, 260];
+  /***** End sample data *****/
+
+  function makeLayouts() {
+    // compute width based on container width for nicer aspect ratio
+    const containerWidth = Math.min(document.querySelector('.main').clientWidth, window.innerWidth - 32);
+    const w = containerWidth;
+    return {
+      lineLayout: {
+        margin: { t:20, r:10, l:40, b:40 },
+        autosize: true,
+        width: w/2 - 20,
+        height: Math.max(280, Math.floor(w * 0.28)),
+        xaxis: { title:'Month' },
+        yaxis: { title:'Search interest' },
+        legend: { orientation:'h', x:0, y:1.12 }
+      },
+      barLayout: {
+        margin: { t:20, r:10, l:40, b:60 },
+        autosize: true,
+        width: w/2 - 20,
+        height: Math.max(280, Math.floor(w * 0.28)),
+        xaxis: { title:'' },
+        yaxis: { title:'Counts' }
+      },
+      pieLayout: {
+        margin: { t:10, r:10, l:10, b:10 },
+        autosize: true,
+        width: Math.min(w/2 - 10, 450),
+        height: Math.max(280, Math.floor(w * 0.30)),
+        showlegend:true
+      },
+      heatmapLayout: {
+        margin: { t:20, r:20, l:60, b:60 },
+        autosize: true,
+        width: Math.min(w/2 - 10, 450),
+        height: Math.max(280, Math.floor(w * 0.30))
+      },
+      funnelLayout: {
+        margin: { t:20, r:10, l:40, b:40 },
+        autosize: true,
+        width: Math.min(w - 40, 900),
+        height: 380
+      }
+    };
+  }
+
+  function renderCharts() {
+    const layouts = makeLayouts();
+
+    // Line chart: trends
+    Plotly.react('lineTrend', [{
+      x: trendData.x,
+      y: trendData.y,
+      type: 'scatter',
+      mode: 'lines+markers',
+      hoverinfo:'x+y',
+      name:'Search Trends',
+      line: { shape:'spline', width:3 }
+    }], layouts.lineLayout, {responsive:true});
+
+    // Bar chart: features
+    Plotly.react('barFeatures', [{
+      x: featureData.x,
+      y: featureData.y,
+      type: 'bar',
+      marker: { color:'#0b75d1' }
+    }], layouts.barLayout, {responsive:true});
+
+    // Pie chart: segments
+    Plotly.react('pieSegments', [{
+      labels: segmentsData.labels,
+      values: segmentsData.values,
+      type: 'pie',
+      textinfo: 'label+percent',
+      hoverinfo: 'label+value'
+    }], layouts.pieLayout, {responsive:true});
+
+    // Heatmap: engagement
+    Plotly.react('heatmapEngagement', [{
+      z: heatmapZ,
+      x: ['Instagram','TikTok','Etsy'],
+      y: ['Millennials','Gen Z','Others'],
+      type:'heatmap',
+      colorscale:'Blues',
+      hoverongaps:false
+    }], layouts.heatmapLayout, {responsive:true});
+
+    // Funnel chart
+    Plotly.react('funnelChart', [{
+      type: 'funnel',
+      y: ['Website Visits','Engagement','Add to Cart','Purchase'],
+      x: funnelX
+    }], layouts.funnelLayout, {responsive:true});
+  }
+
+  // initial render
+  renderCharts();
+
+  // resize handling: debounce for performance
+  let resizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      // re-render charts with new layout widths
+      renderCharts();
+    }, 120);
+  });
+
+  // Also re-render when fonts load or layout changes (optional)
+  document.fonts && document.fonts.ready.then(() => { renderCharts(); });
+</script>
+</body>
+</html>
